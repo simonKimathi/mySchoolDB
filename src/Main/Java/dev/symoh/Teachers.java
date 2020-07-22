@@ -57,6 +57,9 @@ public class Teachers implements TeachersInterface {
 //returns all the teachers
     @Override
     public void view() {
+        if(teacher.isEmpty()){
+            System.out.println("teachers list is empty");
+        }
         Iterator iterator=teacher.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());

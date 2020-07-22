@@ -80,6 +80,9 @@ public class Results extends Students  implements ResultsInterface{
 //returns all results
     @Override
     public void view() {
+        if(results.isEmpty()){
+            System.out.println("results list is empty");
+        }
         Iterator iterator=results.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());

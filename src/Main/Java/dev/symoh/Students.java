@@ -62,6 +62,9 @@ public class Students implements StudentInterface {
     //returns all the students
     @Override
     public void view() {
+        if(stuId.isEmpty()){
+            System.out.println("students list is empty");
+        }
         Iterator iterator=stuId.iterator();
         Iterator iterator1=stuName.iterator();
         while (iterator.hasNext()&&iterator1.hasNext()){
