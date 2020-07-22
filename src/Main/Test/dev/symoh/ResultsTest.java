@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ResultsTest {
     Results results=new Results();
 
+    //ovveride methods for test
+
     @Test
     void getSid() {
         results.setSid("com");

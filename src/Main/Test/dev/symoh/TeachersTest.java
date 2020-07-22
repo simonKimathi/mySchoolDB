@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TeachersTest {
     Teachers teachers=new Teachers();
+    //ovveride methods for test
 
     @Test
     void gettId() {
