@@ -1,4 +1,4 @@
-package dev.symoh;
+package dev.symoh.students;
 
 import java.util.*;
 
@@ -6,8 +6,8 @@ public class Students implements StudentInterface {
     public String sId;
     public String sName;
 
-    List<String> stuId =new ArrayList<>();
-    List<String> stuName =new ArrayList<>();
+    public List<String> stuId =new ArrayList<>();
+    public List<String> stuName =new ArrayList<>();
 
     Scanner scanner = new Scanner(System.in);
 

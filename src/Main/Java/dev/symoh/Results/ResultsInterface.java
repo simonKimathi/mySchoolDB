@@ -1,4 +1,4 @@
-package dev.symoh;
+package dev.symoh.Results;
 
 public interface ResultsInterface {
     public  void add(); //add results

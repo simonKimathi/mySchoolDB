@@ -1,4 +1,4 @@
-package dev.symoh;
+package dev.symoh.students;
 
 public interface StudentInterface {
     public  void add();//add student

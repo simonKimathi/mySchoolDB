@@ -1,4 +1,4 @@
-package dev.symoh;
+package dev.symoh.Teachers;
 
 import java.util.*;
 
@@ -6,7 +6,7 @@ public class Teachers implements TeachersInterface {
     public String tId;
     public String tName;
     Scanner scanner=new Scanner(System.in);
-    List<Teachers> teacher=new ArrayList<>();
+    public List<Teachers> teacher=new ArrayList<>();
     //setter fo teachers id
     public String gettId() {
         return tId;

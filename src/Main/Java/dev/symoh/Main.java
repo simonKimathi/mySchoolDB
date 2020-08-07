@@ -1,6 +1,9 @@
 package dev.symoh;
 
-import java.util.Collections;
+import dev.symoh.Results.Results;
+import dev.symoh.Teachers.Teachers;
+import dev.symoh.students.Students;
+
 import java.util.Scanner;
 
 
@@ -79,26 +82,7 @@ public class Main {
                     if(li1==1){
                         //i implemented add method of results class here so as to use data in other instances of classes created in this class
                         //enter results
-                        boolean present;
-                        String i;
-                        do {
-                            System.out.println("enter student registration number");
-                            i=scanner.nextLine();
-                            //check if the student is present in the students list
-                            present = students.stuId.contains(i);
-                        } while (!present);
-                        results.setSid(i);
-                        System.out.println("enter student name");
-                        results.setName(scanner.nextLine());
-                        System.out.println("enter the subject");
-                        results.setSubject(scanner.nextLine());
-                        System.out.println("enter teacher name");
-                        results.setTeacherName(scanner.nextLine());
-                        System.out.println("enter the score");
-                        results.setScore(scanner.nextDouble());
-                        //add all data to array list using tostring method
-                        results.results.add(results);
-                        System.out.println("results added successfully");
+
                     }
                     else if (li1==2){
                         results.view(); //calls method view from results class

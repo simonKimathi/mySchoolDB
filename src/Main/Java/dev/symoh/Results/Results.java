@@ -1,8 +1,10 @@
-package dev.symoh;
+package dev.symoh.Results;
+
+import dev.symoh.students.Students;
 
 import java.util.*;
 
-public class Results extends Students  implements ResultsInterface{
+public class Results extends Students implements ResultsInterface{
     //innitialize variables
     public String sid;
     public String name;
@@ -12,7 +14,7 @@ public class Results extends Students  implements ResultsInterface{
     //create instances of class
     Students students=new Students();
     Scanner scanner=new Scanner(System.in);
-    List<Results> results=new ArrayList<>();
+    public List<Results> results=new ArrayList<>();
     //getter fo student id
     public String getSid() {
         return sid;
@@ -61,7 +63,24 @@ public class Results extends Students  implements ResultsInterface{
  //adds new result
     @Override
     public  void add() {
-    //implemented in main class
+        boolean present;
+        String i;
+        do {
+            System.out.println("enter student registration number");
+            i=scanner.nextLine();
+            //check if the student is present in the students list
+            present = students.stuId.contains(i);
+        } while (!present);
+        setSid(i);
+        System.out.println("enter student name");
+        setName(scanner.nextLine());
+        System.out.println("enter the subject");
+        setSubject(scanner.nextLine());
+        System.out.println("enter teacher name");
+        setTeacherName(scanner.nextLine());
+        System.out.println("enter the score");
+        setScore(scanner.nextDouble());
+        System.out.println("results added successfully");
     }
  //deletes a certain result
     @Override

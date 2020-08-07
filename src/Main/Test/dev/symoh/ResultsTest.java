@@ -1,5 +1,6 @@
 package dev.symoh;
 
+import dev.symoh.Results.Results;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;

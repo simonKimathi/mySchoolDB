@@ -1,4 +1,4 @@
-package dev.symoh;
+package dev.symoh.Teachers;
 
 public interface TeachersInterface {
     public  void add(); //add new teacher
