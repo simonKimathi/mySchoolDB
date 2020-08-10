@@ -1,7 +1,11 @@
 package dev.symoh.Results;
 
+import dev.symoh.Database.databaseConnection;
 import dev.symoh.students.Students;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Results extends Students implements ResultsInterface{
@@ -11,6 +15,7 @@ public class Results extends Students implements ResultsInterface{
     public String subject;
     public String teacherName;
     public double score;
+    Connection connection;
     //create instances of class
     Students students=new Students();
     Scanner scanner=new Scanner(System.in);
@@ -80,6 +85,23 @@ public class Results extends Students implements ResultsInterface{
         setTeacherName(scanner.nextLine());
         System.out.println("enter the score");
         setScore(scanner.nextDouble());
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("insert into subjects(reg,name,subject,teacher_name,score)VALUES (?,?,?,?,?)");
+            preparedStatement.setString(1,this.getsId());
+            preparedStatement.setString(2,this.getName());
+            preparedStatement.setString(3,this.getSubject());
+            preparedStatement.setString(4,this.getTeacherName());
+            preparedStatement.setString(5, String.valueOf(this.getScore()));
+            databaseConnection.executeUpdate(preparedStatement);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         System.out.println("results added successfully");
     }
  //deletes a certain result
@@ -94,7 +116,19 @@ public class Results extends Students implements ResultsInterface{
         }
         int j=scanner.nextInt();
         results.remove(j);
-        System.out.println("results added successfully");
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM results WHERE id=?");
+            preparedStatement.setString(1,this.getsId());
+            databaseConnection.executeUpdate(preparedStatement);
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("results deleted successfully");
     }
 //returns all results
     @Override
@@ -102,10 +136,23 @@ public class Results extends Students implements ResultsInterface{
         if(results.isEmpty()){
             System.out.println("results list is empty");
         }
-        Iterator iterator=results.iterator();
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM results");
+            databaseConnection.executeQuery(preparedStatement);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*Iterator iterator=results.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
-        }
+        }*/
 
     }
 }

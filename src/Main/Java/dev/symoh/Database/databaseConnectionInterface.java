@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public interface databaseConnectionInterface {
 
-    public void connect() throws SQLException;
-    public Connection getConnection() throws SQLException;
+    public void connect() throws SQLException, ClassNotFoundException;
+    public Connection getConnection() throws SQLException, ClassNotFoundException;
     public ResultSet executeQuery(PreparedStatement preparedStatement) throws SQLException;
     public Boolean executeUpdate(PreparedStatement preparedStatement) throws SQLException;
     public void close() throws SQLException;

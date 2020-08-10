@@ -1,10 +1,16 @@
 package dev.symoh.Teachers;
 
+import dev.symoh.Database.databaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Teachers implements TeachersInterface {
     public String tId;
     public String tName;
+    Connection connection;
     Scanner scanner=new Scanner(System.in);
     public List<Teachers> teacher=new ArrayList<>();
     //setter fo teachers id
@@ -37,6 +43,20 @@ public class Teachers implements TeachersInterface {
         System.out.println("enter the name of the teacher");
         teachers.settName(scanner.nextLine());
         teacher.add(teachers);
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("insert into teachers(reg,name)VALUES (?,?)");
+            preparedStatement.setString(1,this.gettId());
+            preparedStatement.setString(2,this.gettName());
+            databaseConnection.executeUpdate(preparedStatement);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         System.out.println("teacher added successfully");
 
     }
@@ -52,6 +72,18 @@ public class Teachers implements TeachersInterface {
         }
         int j=scanner.nextInt();
         teacher.remove(j);
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM teachers WHERE id=?");
+            preparedStatement.setString(1,this.gettId());
+            databaseConnection.executeUpdate(preparedStatement);
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         System.out.println("teacher deleted successfully");
     }
 //returns all the teachers
@@ -60,10 +92,22 @@ public class Teachers implements TeachersInterface {
         if(teacher.isEmpty()){
             System.out.println("teachers list is empty");
         }
-        Iterator iterator=teacher.iterator();
+        try {
+            databaseConnection databaseConnection=new databaseConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM teachers");
+            databaseConnection.executeQuery(preparedStatement);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*Iterator iterator=teacher.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
-        }
+        }*/
 
     }
 }
