@@ -4,6 +4,7 @@ import dev.symoh.Database.databaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -95,7 +96,10 @@ public class Teachers implements TeachersInterface {
         try {
             databaseConnection databaseConnection=new databaseConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM teachers");
-            databaseConnection.executeQuery(preparedStatement);
+            ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
+            while (resultset.next()){
+                System.out.println(resultset.getString(1)+resultset.getString(2));
+            }
 
             connection.close();
 

@@ -5,6 +5,7 @@ import dev.symoh.students.Students;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -74,6 +75,14 @@ public class Results extends Students implements ResultsInterface{
             System.out.println("enter student registration number");
             i=scanner.nextLine();
             //check if the student is present in the students list
+            try {
+                databaseConnection databaseConnection=new databaseConnection();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             present = students.stuId.contains(i);
         } while (!present);
         setSid(i);
@@ -140,8 +149,10 @@ public class Results extends Students implements ResultsInterface{
             databaseConnection databaseConnection=new databaseConnection();
 
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM results");
-            databaseConnection.executeQuery(preparedStatement);
-
+            ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
+            while (resultset.next()){
+                System.out.println(resultset.getString(1)+resultset.getString(2)+resultset.getString(3)+resultset.getString(4+resultset.getString(5)+resultset.getString(6)));
+            }
             connection.close();
 
         } catch (SQLException e) {
