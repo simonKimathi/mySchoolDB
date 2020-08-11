@@ -46,6 +46,7 @@ public class Teachers implements TeachersInterface {
         teacher.add(teachers);
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("insert into teachers(reg,name)VALUES (?,?)");
             preparedStatement.setString(1,this.gettId());
             preparedStatement.setString(2,this.gettName());
@@ -75,6 +76,7 @@ public class Teachers implements TeachersInterface {
         teacher.remove(j);
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM teachers WHERE id=?");
             preparedStatement.setString(1,this.gettId());
             databaseConnection.executeUpdate(preparedStatement);
@@ -95,6 +97,7 @@ public class Teachers implements TeachersInterface {
         }
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM teachers");
             ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
             while (resultset.next()){

@@ -77,6 +77,7 @@ public class Results extends Students implements ResultsInterface{
             //check if the student is present in the students list
             try {
                 databaseConnection databaseConnection=new databaseConnection();
+                connection=databaseConnection.getConnection();
                 PreparedStatement preparedStatement=connection.prepareStatement("select *  FROM results WHERE id=?");
                 preparedStatement.setString(1,i);
                 present=databaseConnection.executeUpdate(preparedStatement);
@@ -100,6 +101,7 @@ public class Results extends Students implements ResultsInterface{
         setScore(scanner.nextDouble());
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("insert into subjects(reg,name,subject,teacher_name,score)VALUES (?,?,?,?,?)");
             preparedStatement.setString(1,this.getsId());
             preparedStatement.setString(2,this.getName());
@@ -121,16 +123,17 @@ public class Results extends Students implements ResultsInterface{
     @Override
     public void delete() {
         System.out.println("enter the number of result you want to delete");
-        Iterator iterator=results.iterator();
+        /*Iterator iterator=results.iterator();
         int i=0;
         while (iterator.hasNext()){
             System.out.println(i+". "+iterator.next());
             i++;
         }
         int j=scanner.nextInt();
-        results.remove(j);
+        results.remove(j);*/
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM results WHERE id=?");
             preparedStatement.setString(1,this.getsId());
             databaseConnection.executeUpdate(preparedStatement);
@@ -151,7 +154,7 @@ public class Results extends Students implements ResultsInterface{
         }
         try {
             databaseConnection databaseConnection=new databaseConnection();
-
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM results");
             ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
             while (resultset.next()){

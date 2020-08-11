@@ -51,6 +51,7 @@ public class Subjects implements SubjectInterface {
         System.out.println("student added successfully");
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("insert into subjects(reg,name)VALUES (?,?)");
             preparedStatement.setString(1,this.getSubjectId());
             preparedStatement.setString(2,this.getSubjectName());
@@ -80,6 +81,7 @@ public class Subjects implements SubjectInterface {
         subjectNameList.remove(j);
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM subject WHERE id=?");
             preparedStatement.setString(1,this.getSubjectId());
             databaseConnection.executeUpdate(preparedStatement);
@@ -102,6 +104,7 @@ public class Subjects implements SubjectInterface {
         Iterator iterator1= subjectNameList.iterator();
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM subjects");
             ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
             while (resultset.next()){

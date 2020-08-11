@@ -11,6 +11,7 @@ import java.util.*;
 public class Students implements StudentInterface {
     public String sId;
     public String sName;
+
     private Connection connection;
 
     public List<String> stuId =new ArrayList<>();
@@ -62,6 +63,7 @@ public class Students implements StudentInterface {
         System.out.println("student added successfully");
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("insert into students(reg,name)VALUES (?,?)");
             preparedStatement.setString(1,this.getsId());
             preparedStatement.setString(2,this.getsName());
@@ -92,6 +94,7 @@ public class Students implements StudentInterface {
         stuName.remove(j);
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("DELETE  FROM students WHERE id=?");
             preparedStatement.setString(1,this.getsId());
             databaseConnection.executeUpdate(preparedStatement);
@@ -117,6 +120,7 @@ public class Students implements StudentInterface {
         }
         try {
             databaseConnection databaseConnection=new databaseConnection();
+            connection=databaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM students");
             ResultSet resultset=databaseConnection.executeQuery(preparedStatement);
             while (resultset.next()){
