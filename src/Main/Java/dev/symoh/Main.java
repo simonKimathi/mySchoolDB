@@ -82,6 +82,7 @@ public class Main {
                     if(li1==1){
                         //i implemented add method of results class here so as to use data in other instances of classes created in this class
                         //enter results
+                        results.add();
 
                     }
                     else if (li1==2){
