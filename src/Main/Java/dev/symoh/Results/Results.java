@@ -69,7 +69,7 @@ public class Results extends Students implements ResultsInterface{
  //adds new result
     @Override
     public  void add() {
-        boolean present;
+        boolean present=false;
         String i;
         do {
             System.out.println("enter student registration number");
@@ -77,13 +77,17 @@ public class Results extends Students implements ResultsInterface{
             //check if the student is present in the students list
             try {
                 databaseConnection databaseConnection=new databaseConnection();
+                PreparedStatement preparedStatement=connection.prepareStatement("select *  FROM results WHERE id=?");
+                preparedStatement.setString(1,i);
+                present=databaseConnection.executeUpdate(preparedStatement);
+                connection.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            present = students.stuId.contains(i);
+           // present = students.stuId.contains(i);
         } while (!present);
         setSid(i);
         System.out.println("enter student name");
